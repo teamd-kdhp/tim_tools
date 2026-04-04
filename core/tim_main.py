@@ -13,3 +13,9 @@ Rules:
 - No direct LLM call
 - No direct memory/state access
 """
+
+from . import tim_core
+
+
+def handle_user_input(user_input: str) -> str:
+    return tim_core.handle_user_input(user_input)

@@ -1,45 +1,44 @@
 # TIM CURRENT EXECUTION
 
 ## Objective
-Define the minimal design of the LLM Gateway before implementation.
+Define the minimal conversation flow of TIM before wider integration.
 
 ## Current Development Phase
-LLM GATEWAY DESIGN PHASE
+MINIMAL CONVERSATION DESIGN PHASE
 
 ## Current Step
-Step 3.1: LLM Gateway Design
+Step 4: Minimal Conversation
 
 ## Task
-Define the responsibility, boundaries, input/output, and non-goals of tim_llm_gateway.py only.
+Define the minimal end-to-end conversation path using tim_main.py, tim_core.py, and tim_llm_gateway.py only.
 
 ## Scope
-- Define gateway responsibility
-- Define input structure
-- Define output structure
-- Define dependency boundaries
-- Define forbidden behavior
-- Keep scope minimal
+- Define minimal request flow
+- Define minimal responsibility split between main/core/gateway
+- Define the exact input/output path
+- Keep implementation scope as small as possible
 
 ## In Scope Now
-- tim_llm_gateway.py design only
-- Design notes / contracts / boundaries only
-- No implementation yet
+- tim_main.py design
+- tim_core.py design
+- minimal conversation flow design
+- response path definition only
 
 ## Out of Scope Now
-- No actual API connection
-- No SDK installation
-- No environment variable setup
 - No Memory integration
+- No State integration
 - No Context Builder integration
-- No connector integration
-- No full conversation flow
+- No Data Layer integration
+- No connectors
 - No prompt optimization
+- No advanced orchestration
+- No multi-turn memory behavior
 
 ## Constraints
-- Do NOT implement code yet
-- Do NOT modify other modules
-- Do NOT jump to Step 3.2+
-- Do NOT expand scope beyond gateway design
+- Do ent code yet
+- Do NOT modify other modules yet
+- Do NOT jump to Step 5+
+- Do NOT expand scope beyond minimal conversation flow
 
 ## Required Development Order
 Step 1: Architecture Fix

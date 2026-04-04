@@ -1,0 +1,28 @@
+[
+  {
+    "role": "user",
+    "content": "こんにちは"
+  },
+  {
+    "role": "assistant",
+    "content": "こんにちは！今日はどんなことをお話ししましょうか？"
+  },
+  {
+    "role": "user",
+    "content": "さっき何を話した？"
+  },
+  {
+    "role": "assistant",
+    "content": "さっきは「こんにちは」と挨拶を交わしました。何か特定の話題についてお話ししたいことはありますか？"
+  },
+  {
+    "role": "user",
+    "content": "普通に会話",
+    "important": false
+  },
+  {
+    "role": "assistant",
+    "content": "もちろんです！最近はどうですか？何か楽しいことや興味深い出来事がありましたか？",
+    "important": false
+  }
+]

@@ -1,16 +1,19 @@
-"""
-tim_core.py
+from tim_tools.core.tim_llm_gateway import send_to_llm
+from tim_tools.core.tim_brain import decide_action
 
-TIM v2 central orchestrator.
 
-Responsibility:
-- Control overall request flow
-- Call context builder
-- Call LLM gateway
-- Build final response pipeline
+def handle_user_input(user_input):
+    action = decide_action(user_input)
 
-Rules:
-- No hardcoded business decision logic
-- No direct connector logic
-- No direct web/file/SaaS implementation
-"""
+    if action == "memory":
+        return "OK, 記憶しました"
+
+    elif action == "search":
+        return "検索機能はまだ未実装です"
+
+    else:
+        return send_to_llm({
+            "prompt": user_input,
+            "context": {},
+            "mode": "conversation",
+        })["response"]
