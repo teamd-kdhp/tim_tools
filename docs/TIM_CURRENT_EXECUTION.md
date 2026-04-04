@@ -1,56 +1,44 @@
 # TIM CURRENT EXECUTION
 
 ## Objective
-Define the minimal conversation flow of TIM before wider integration.
+Replace the current rule-based brain with an LLM-based action selection brain.
 
 ## Current Development Phase
-MINIMAL CONVERSATION DESIGN PHASE
+BRAIN LLM DESIGN PHASE
 
 ## Current Step
-Step 4: Minimal Conversation
+Step 5: Brain LLM Design
 
 ## Task
-Define the minimal end-to-end conversation path using tim_main.py, tim_core.py, and tim_llm_gateway.py only.
+Define how tim_brain_llm.py will classify user intent into one of:
+- memory
+- search
+- chat
 
 ## Scope
-- Define minimal request flow
-- Define minimal responsibility split between main/core/gateway
-- Define the exact input/output path
-- Keep implementation scope as small as possible
+- Design brain LLM behavior only
+- Define input/output shape
+- Define fallback behavior
+- Keep routing responsibility separate from response generation
 
 ## In Scope Now
-- tim_main.py design
-- tim_core.py design
-- minimal conversation flow design
-- response path definition only
+- tim_brain_llm.py design
+- action classification design
+- fallback-to-chat rule
+- Brain-only responsibility
 
 ## Out of Scope Now
-- No Memory integration
-- No State integration
-- No Context Builder integration
-- No Data Layer integration
-- No connectors
-- No prompt optimization
-- No advanced orchestration
-- No multi-turn memory behavior
+- No Memory redesign
+- No State Layer work
+- No Data Layer work
+- No connector work
+- No prompt optimization beyond action classification
+- No final response generation inside brain
 
 ## Constraints
-- Do ent code yet
+- Do NOT implement code yet
 - Do NOT modify other modules yet
-- Do NOT jump to Step 5+
-- Do NOT expand scope beyond minimal conversation flow
-
-## Required Development Order
-Step 1: Architecture Fix
-Step 2: File Structure
-Step 3.1: LLM Gateway Design
-Step 3.2: LLM Gateway Minimal Implementation
-Step 4: Minimal Conversation
-Step 5: Memory Layer
-Step 6: State Layer
-Step 7: Data Layer
-Step 8: Context Builder
-Step 9: Thinking Template Optimization
+- Do NOT expand scope beyond Brain LLM design
 
 ## Single Source of Truth
 CURRENT_EXECUTION is absolute.
