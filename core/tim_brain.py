@@ -1,11 +1,15 @@
 # TIM Brain
 # Top Intelligence Manager Core
 
+from agents.tim_intelligence_agent import TIMIntelligenceAgent
+from agents.tim_execution_agent import TIMExecutionAgent
+
 
 class TIMBrain:
 
     def __init__(self):
-        pass
+        self.intelligence_agent = TIMIntelligenceAgent()
+        self.execution_agent = TIMExecutionAgent()
 
     def process_input(self, user_input):
         """
@@ -109,11 +113,15 @@ class TIMBrain:
         results = []
 
         for item in assigned_tasks:
-            results.append({
-                "agent": item.get("agent"),
-                "task": item.get("task"),
-                "status": "prepared",
-            })
+            agent_name = item.get("agent")
+            task = item.get("task", {})
+
+            if agent_name == "intelligence":
+                result = self.intelligence_agent.run(task)
+            else:
+                result = self.execution_agent.run(task)
+
+            results.append(result)
 
         return results
 
