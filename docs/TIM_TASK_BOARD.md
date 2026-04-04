@@ -1,67 +1,77 @@
 # TIM TASK BOARD
 
-## ■ Current Phase
-INITIAL BUILD
+## Step 2: File Structure Design
 
----
+### Goal
+Define stable file/module structure for TIM v2 before implementation.
 
-## ■ Current Objective
+### Scope
+- Define top-level files
+- Define module responsibilities
+- Define dependency boundaries
+- Avoid premature implementation
 
-Build core structure of TIM agent system
+### Planned Core Files
 
----
+1. tim_main.py
+- Entry point
+- Receives user input
+- Calls TIM core
 
-## ■ Tasks
+2. tim_core.py
+- Central orchestrator
+- Controls flow between layers
+- Builds final response pipeline
 
-### Phase 1: Foundation Setup
+3. tim_llm_gateway.py
+- Wrapper for LLM communication
+- Sends prompts
+- Receives responses
 
-- [ ] Define system concept (TIM_STATUS.md)
-- [ ] Define operating rules
-- [ ] Define agent structure
-- [ ] Define task flow
+4. tim_memory_layer.py
+- Handles long-term memory
+- Stores and retrieves persistent information
 
----
+5. tim_state_layer.py
+- Handles current task state
+- Tracks active project / phase / progress
 
-### Phase 2: Core Implementation
+6. tim_context_builder.py
+- Collects memory + state + external data
+- Builds optimized context for LLM
 
-- [ ] Implement tim_brain.py
-- [ ] Implement task decomposition logic
-- [ ] Implement agent control flow
+7. tim_data_layer.py
+- Central access layer for external data
+- Connects Drive / Web / SaaS / DB
 
----
+8. tim_drive_connector.py
+- Retrieves documents from Drive
 
-### Phase 3: Agent Development
+9. tim_web_connector.py
+- Retrieves web information
 
-- [ ] Intelligence Agent
-- [ ] Execution Agent
+10. tim_saas_connector.py
+- Retrieves SaaS data (e.g. accounting, CRM)
 
----
+11. tim_executor_connector.py
+- Future execution layer
+- Sends instructions to other systems
 
-### Phase 4: Runtime & Logging
+### Dependency Rule
 
-- [ ] Logging system
-- [ ] State tracking
-- [ ] Task monitoring
+tim_main.py
+→ tim_core.py
+→ tim_context_builder.py
+→ tim_memory_layer.py
+→ tim_state_layer.py
+→ tim_data_layer.py
+→ connectors
+→ tim_llm_gateway.py
 
----
+### Constraints
 
-### Phase 5: Expansion
-
-- [ ] OpenClaw integration
-- [ ] External API connection
-- [ ] Multi-agent scaling
-
----
-
-## ■ Current Focus
-
-Phase 1 completion
-
----
-
-## ■ Notes
-
-- Do not implement before design is fixed
-- Always follow modular structure
-- Avoid premature optimization
+- Do NOT implement code yet
+- Do NOT define detailed methods yet
+- Do NOT add new agents yet
+- Do NOT jump to Step 3
 

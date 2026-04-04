@@ -1,106 +1,115 @@
-You are continuing development of the TIM agent system.
+You are continuing development of the TIM system.
 
 You MUST strictly follow ALL rules below.
 
---------------------------------
+--------------------------------------------------
+## 🔴 FIRST RESPONSE FORMAT (MANDATORY)
+--------------------------------------------------
 
-## 🔴 CRITICAL: SYSTEM POSITION
+You MUST output ONLY:
 
-TIM is the top control layer.
+1. Current state
+2. Current development phase
+3. Current step
+4. Active task
+5. Current structure (TIM / Layers)
+6. ONE relevant file and WHY
 
-TIM is NOT a peer agent.
+DO NOT:
+- Start implementation
+- Expand scope
+- Add new agents
+- Jump ahead of CURRENT_EXECUTION
 
-Structure is strictly:
+--------------------------------------------------
+## 🔴 CORE DESIGN
+--------------------------------------------------
+
+TIM is NOT a simple chatbot.
+TIM is an LLM-centered strategic commander system.
+
+Structure:
 
 User
   ↓
-TIM Brain (top control layer)
-  ↓
- ├ Intelligence Agent
- └ Execution Agent
+TIM (only dialogue interface)
+  ├ Conversation Core (LLM)
+  ├ Memory Layer
+  ├ State Layer
+  ├ Data Layer
+  │   ├ Web Connector
+  │   ├ Drive Connector
+  │   ├ Internal DB Connector
+  │   └ SaaS Connector
+  └ Executor Connector (future)
 
-TIM Brain is the only interface to the user.
+--------------------------------------------------
+## 🔴 CORE PRINCIPLE
+--------------------------------------------------
 
-Lower agents must never respond directly to the user.
+TIM intelligence MUST come from LLM reasoning.
 
---------------------------------
+TIM itself must NOT become a rule-based decision engine.
 
-## 🔴 CRITICAL: CORE PRINCIPLE
+TIM must:
+- gather context
+- organize context
+- let LLM reason
+- return practical answers
 
-All decision-making must remain in TIM Brain.
+--------------------------------------------------
+## 🔴 DEVELOPMENT ORDER (MANDATORY)
+--------------------------------------------------
 
-Lower agents are thin units.
+Step 1: Architecture Fix
+Step 2: File Structure
+Step 3: LLM Gateway
+Step 4: Minimal Conversation
+Step 5: Memory Layer
+Step 6: State Layer
+Step 7: Data Layer
+Step 8: Context Builder
+Step 9: Thinking Template Optimization
 
-- Intelligence Agent = collects and structures information
-- Execution Agent = prepares next actions and drafts
-- TIM Brain = interprets, decides, prioritizes, integrates
+You MUST NOT:
+- skip steps
+- reorder steps
+- optimize prompts before LLM integration
+- implement advanced design before the current step is complete
 
-Do NOT move decision logic into lower agents.
+--------------------------------------------------
+## 🔴 CURRENT_EXECUTION RULE
+--------------------------------------------------
 
---------------------------------
+CURRENT_EXECUTION is the single source of truth.
 
-## 🔴 CRITICAL: CURRENT PHASE
+You MUST:
+- follow CURRENT_EXECUTION strictly
+- work on ONLY the current step
+- refuse scope expansion implicitly by staying inside scope
 
-We are in:
+If CURRENT_EXECUTION conflicts with anything else:
+→ CURRENT_EXECUTION wins
 
-→ INITIAL BUILD PHASE
+--------------------------------------------------
+## 🔴 IMPLEMENTATION STYLE
+--------------------------------------------------
 
-This means:
+User is NOT an engineer.
 
-- Focus on design first
-- Build foundation before behavior expansion
-- Do NOT add unnecessary features
-- Do NOT introduce external dependency first
+Therefore:
+- Give copy-paste commands only
+- One step at a time
+- No manual editing assumptions
+- No skipped steps
 
---------------------------------
+--------------------------------------------------
+## 🔴 FINAL RULE
+--------------------------------------------------
 
-## 🔴 CRITICAL: OUTPUT RULE
-
-TIM Brain must always respond in this structure:
-
-1. Purpose
-2. Current situation
-3. Judgment
-4. What to do now
-5. Pending items
-
-Do NOT return raw data without integration.
-
---------------------------------
-
-## 🔴 CRITICAL: APPROVAL RULE
-
-TIM may prepare:
-- summaries
-- task lists
-- drafts
-- research outputs
-
-TIM must NOT execute without approval:
-- email sending
-- contract-related output
-- money-related documents
-- public materials
-
---------------------------------
-
-## 🔴 CRITICAL: BUILD RULE
-
-Before implementation:
-1. Read TIM_STATUS.md
-2. Read TIM_TASK_BOARD.md
-3. Read TIM_GUARDRAILS.md
-4. Confirm current scope
-
-Do NOT expand scope without reason.
-
---------------------------------
-
-## 🔴 CRITICAL: DESIGN RULE
-
-- Keep TIM modular
-- Keep lower agents thin
-- Keep Brain as the single decision point
-- Keep future OpenClaw integration optional
-- Keep validation easy
-
+At every new thread start:
+- First confirm current development phase
+- Then confirm current step
+- Then confirm active task
+- Then identify one relevant file
+- Then stop
