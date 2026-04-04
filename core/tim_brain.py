@@ -3,6 +3,7 @@
 
 from agents.tim_intelligence_agent import TIMIntelligenceAgent
 from agents.tim_execution_agent import TIMExecutionAgent
+from state.tim_task_state import TIMTaskState
 
 
 class TIMBrain:
@@ -10,6 +11,7 @@ class TIMBrain:
     def __init__(self):
         self.intelligence_agent = TIMIntelligenceAgent()
         self.execution_agent = TIMExecutionAgent()
+        self.task_state = TIMTaskState()
 
     def process_input(self, user_input):
         """
@@ -17,7 +19,8 @@ class TIMBrain:
         """
         intent = self.interpret_intent(user_input)
         tasks = self.decompose_tasks(intent)
-        assigned_tasks = self.assign_tasks(tasks)
+        task_record = self.task_state.create_task_record(user_input, intent, tasks)
+        assigned_tasks = self.assign_tasks(task_record["tasks"])
         execution_result = self.execute(assigned_tasks)
         monitoring_result = self.monitor(execution_result)
         return self.feedback(monitoring_result)
