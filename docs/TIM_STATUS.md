@@ -1,58 +1,90 @@
 # TIM STATUS
 
-## Current State
-TIM is currently restored to a Brain-centered route.
+## Current Phase
+INITIAL BUILD
 
-Active working route:
-- core/tim_main.py
-- legacy/tim_brain.py
-- legacy/agents/*
-- state/tim_task_state.py
+## Current Goal
+Build TIM as an LLM-first strategic partner system without over-engineering.
 
-Current confirmed behavior:
-- core.tim_main.handle_user_input() works
-- TIMBrain.process() works
-- Brain can return structured decision output
-- entry route no longer depends on broken tim_core.py path
+## Current Step
+Define and stabilize core architecture before implementation.
 
-## Current Working Flow
-core/tim_main.py
-→ legacy.tim_brain.TIMBrain.process()
-→ StrategyAgent
-→ IntelligenceAgent / ExecutionAgent
-→ TIMTaskState
-→ structured dict output
+## Active Task
+Design minimal TIM runtime structure centered on:
+- Conversation (LLM)
+- Memory
+- State
+- Context Builder
 
-## Verified Behavior
-- `python3 -m legacy.tim_brain` works
-- `from core.tim_main import handle_user_input` works
-- `handle_user_input("市場を分析して")` returns a dict
-- Brain-centered route is executable
+## What is DONE
+- TIM concept defined
+- System philosophy fixed (LLM-first)
+- TIM_REQUIREMENTS_V3.md created
+- TIM_START_PROMPT.md created
 
-## Current Limitation
-- output is still dict, not natural conversation
-- core/tim_core.py is not the valid active route
-- core/tim_brain.py is not the active brain
-- Memory Layer exists separately but is not integrated into the active brain route
-- State Layer is minimal
-- Data Layer is not connected
-- Context Builder is not connected
-- connectors are not connected
-- runtime logging is not implemented
+## What is NOT DONE
+- Memory Layer implementation
+- State Layer implementation
+- Context Builder implementation
+- Data Layer (Web / Drive / DB / SaaS)
+- Execution layer (OpenClaw integration)
 
-## Active Files
-- core/tim_main.py
-- legacy/tim_brain.py
-- legacy/agents/intelligence_agent.py
-- legacy/agents/execution_agent.py
-- legacy/agents/strategy_agent.py
-- state/tim_task_state.py
+## Current Architecture Direction
 
-## Frozen / Not Active
-- core/tim_core.py
-- core/tim_brain.py
+TIM is:
 
-## Git State
-- repository is clean
-- current restored route is on Mac mini
-- development should proceed from Mac mini side
+User
+ ↓
+TIM (LLM-first orchestrator)
+ ├ Conversation Core (LLM)
+ ├ Memory Layer
+ ├ State Layer
+ ├ Context Builder
+ ├ Data Layer (future)
+ └ Execution Layer (future)
+
+## Design Principles
+
+- LLM is the core intelligence
+- TIM must not degrade ChatGPT quality
+- Memory / State / Data are extensions, not replacements
+- Avoid over-architecture
+- Avoid premature abstraction
+- Build minimal → validate → expand
+
+## Known Constraints
+
+- Must preserve natural conversation quality
+- Must avoid rule-based decision system
+- Must not break context continuity
+- Must support future connectors
+
+## Next Step
+
+Design TIM core runtime (minimal version):
+
+Define:
+- How conversation → context → LLM → response flows
+- How memory is retrieved and injected
+- How state is tracked and updated
+- How context builder selects inputs
+
+DO NOT:
+- implement connectors yet
+- over-design multi-agent systems
+- introduce complex orchestration
+
+## Success Criteria (Short-term)
+
+- TIM can respond naturally like ChatGPT
+- TIM can remember key information
+- TIM can track current discussion state
+- TIM can structure context properly before LLM
+
+## Success Criteria (Long-term)
+
+- User naturally relies on TIM
+- TIM feels like internal chief-of-staff
+- TIM reduces need to re-explain context
+- TIM integrates internal + external information seamlessly
+

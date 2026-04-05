@@ -1,115 +1,67 @@
 You are continuing development of the TIM system.
 
-You MUST strictly follow ALL rules below.
+Before doing anything, you MUST read:
+- docs/TIM_CONSTITUTION.md
+- docs/TIM_REQUIREMENTS_V3.md
+- docs/TIM_STATUS.md
+- docs/TIM_CURRENT_EXECUTION.md
 
---------------------------------------------------
-## 🔴 FIRST RESPONSE FORMAT (MANDATORY)
---------------------------------------------------
+CRITICAL PRINCIPLES
+
+- TIM is LLM-first
+- TIM is the only dialogue interface
+- TIM must not become a rule-based decision engine
+- TIM must not become a degraded wrapper around ChatGPT
+- Brain architecture is optional
+- The real goal is to extend LLM with memory, state, and data access
+
+If any old implementation conflicts:
+- Constitution wins
+
+If any implementation weakens LLM-centered usefulness:
+- Reject that direction
+
+IMPLEMENTATION PHILOSOPHY
+
+TIM should be:
+- LLM-centered conversation core
+- memory extension
+- current-state awareness
+- internal/external information access
+- future execution layer
+
+TIM's value:
+- remembering
+- tracking current work
+- fetching needed information
+- helping the user think and act better
+
+DO NOT
+
+- do not assume old architecture is correct
+- do not force Brain/Agent design
+- do not add rigid rule-based logic
+- do not expand scope without confirmation
+- do not degrade conversation quality
+
+FIRST RESPONSE FORMAT (MANDATORY)
 
 You MUST output ONLY:
-
 1. Current state
 2. Current development phase
 3. Current step
 4. Active task
-5. Current structure (TIM / Layers)
+5. Current valid architecture
 6. ONE relevant file and WHY
 
-DO NOT:
-- Start implementation
-- Expand scope
-- Add new agents
-- Jump ahead of CURRENT_EXECUTION
+Do NOT:
+- start implementation immediately
+- expand scope
+- redesign casually
 
---------------------------------------------------
-## 🔴 CORE DESIGN
---------------------------------------------------
+FINAL RULE
 
-TIM is NOT a simple chatbot.
-TIM is an LLM-centered strategic commander system.
+TIM is not a workflow bot.
+TIM is the user's strategic partner.
+Always preserve that direction.
 
-Structure:
-
-User
-  ↓
-TIM (only dialogue interface)
-  ├ Conversation Core (LLM)
-  ├ Memory Layer
-  ├ State Layer
-  ├ Data Layer
-  │   ├ Web Connector
-  │   ├ Drive Connector
-  │   ├ Internal DB Connector
-  │   └ SaaS Connector
-  └ Executor Connector (future)
-
---------------------------------------------------
-## 🔴 CORE PRINCIPLE
---------------------------------------------------
-
-TIM intelligence MUST come from LLM reasoning.
-
-TIM itself must NOT become a rule-based decision engine.
-
-TIM must:
-- gather context
-- organize context
-- let LLM reason
-- return practical answers
-
---------------------------------------------------
-## 🔴 DEVELOPMENT ORDER (MANDATORY)
---------------------------------------------------
-
-Step 1: Architecture Fix
-Step 2: File Structure
-Step 3: LLM Gateway
-Step 4: Minimal Conversation
-Step 5: Memory Layer
-Step 6: State Layer
-Step 7: Data Layer
-Step 8: Context Builder
-Step 9: Thinking Template Optimization
-
-You MUST NOT:
-- skip steps
-- reorder steps
-- optimize prompts before LLM integration
-- implement advanced design before the current step is complete
-
---------------------------------------------------
-## 🔴 CURRENT_EXECUTION RULE
---------------------------------------------------
-
-CURRENT_EXECUTION is the single source of truth.
-
-You MUST:
-- follow CURRENT_EXECUTION strictly
-- work on ONLY the current step
-- refuse scope expansion implicitly by staying inside scope
-
-If CURRENT_EXECUTION conflicts with anything else:
-→ CURRENT_EXECUTION wins
-
---------------------------------------------------
-## 🔴 IMPLEMENTATION STYLE
---------------------------------------------------
-
-User is NOT an engineer.
-
-Therefore:
-- Give copy-paste commands only
-- One step at a time
-- No manual editing assumptions
-- No skipped steps
-
---------------------------------------------------
-## 🔴 FINAL RULE
---------------------------------------------------
-
-At every new thread start:
-- First confirm current development phase
-- Then confirm current step
-- Then confirm active task
-- Then identify one relevant file
-- Then stop
