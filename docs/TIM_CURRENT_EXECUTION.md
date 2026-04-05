@@ -1,44 +1,29 @@
 # TIM CURRENT EXECUTION
 
-## Objective
-Replace the current rule-based brain with an LLM-based action selection brain.
+## Phase
+HANDOFF（メモリ完成後）
 
-## Current Development Phase
-BRAIN LLM DESIGN PHASE
+## Step
+Step 5 完了
 
-## Current Step
-Step 5: Brain LLM Design
+## Active Task
+なし
 
-## Task
-Define how tim_brain_llm.py will classify user intent into one of:
-- memory
-- search
-- chat
+## 状態
+- memory保存 OK
+- memory上書き OK
+- memory反映 OK
+- chat動作 OK
 
 ## Scope
-- Design brain LLM behavior only
-- Define input/output shape
-- Define fallback behavior
-- Keep routing responsibility separate from response generation
+- 何も追加しない
+- 次タスク未決定
 
-## In Scope Now
-- tim_brain_llm.py design
-- action classification design
-- fallback-to-chat rule
-- Brain-only responsibility
+## 禁止
+- 勝手な実装
+- 構造変更
+- Agent追加
 
-## Out of Scope Now
-- No Memory redesign
-- No State Layer work
-- No Data Layer work
-- No connector work
-- No prompt optimization beyond action classification
-- No final response generation inside brain
+## Source of Truth
+CURRENT_EXECUTION が絶対
 
-## Constraints
-- Do NOT implement code yet
-- Do NOT modify other modules yet
-- Do NOT expand scope beyond Brain LLM design
-
-## Single Source of Truth
-CURRENT_EXECUTION is absolute.
