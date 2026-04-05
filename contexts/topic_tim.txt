@@ -1,0 +1,8 @@
+TIM is a minimal LLM orchestrator.
+
+- TIM must NOT think
+- TIM must NOT analyze
+- TIM must remain simple
+- LLM does all reasoning
+
+Focus on improving system design under these constraints.

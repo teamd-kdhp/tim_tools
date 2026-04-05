@@ -1,1 +1,12 @@
 {"time": "2026-04-05T11:16:32.983613", "input": "どう思う？", "prompt_length": 5}
+{"time": "2026-04-05T11:22:29.933315", "input": "TIMどう改善する？", "prompt_length": 36}
+{"time": "2026-04-05T11:23:59.572019", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:25:14.074174", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:26:15.965102", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:27:22.656740", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:28:28.462252", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:29:33.802858", "input": "TIMどう改善する？", "prompt_length": 212}
+{"time": "2026-04-05T11:30:52.662691", "input": "Current files are:\n- core/context_selector.py\n- core/prompt_builder.py\n- core/tim_runner.py\n- run_tim.sh\n\nUnder these exact files only, how should TIM be simplified further? Do not mention any file that does not exist.", "prompt_length": 420}
+{"time": "2026-04-05T11:33:10.487675", "input": "TIMどう改善する？", "prompt_length": 10}
+{"time": "2026-04-05T11:37:00.915235", "input": "Current files:\n- core/tim_runner.py\n- run_tim.sh\n\nUnder these exact files only, how should TIM be simplified further? Do not mention any file that does not exist.", "prompt_length": 162}
+{"time": "2026-04-05T11:37:57.015216", "input": "Current files:\n- core/tim_runner.py\n- run_tim.sh\n\nSimplify TIM by modifying only these files.\nBe concrete about what to change inside tim_runner.py.\nDo not give general advice.", "prompt_length": 176}
