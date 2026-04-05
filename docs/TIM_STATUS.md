@@ -1,90 +1,92 @@
 # TIM STATUS
 
 ## Current Phase
-INITIAL BUILD
+MINIMUM WORKING CORE COMPLETED
 
 ## Current Goal
-Build TIM as an LLM-first strategic partner system without over-engineering.
+Stabilize the first working TIM runtime based on LLM-first architecture.
 
 ## Current Step
-Define and stabilize core architecture before implementation.
+Update documentation to reflect the real current implementation state.
 
 ## Active Task
-Design minimal TIM runtime structure centered on:
-- Conversation (LLM)
-- Memory
-- State
-- Context Builder
+Document the current working TIM Runtime V1 and fix source-of-truth files.
 
 ## What is DONE
-- TIM concept defined
-- System philosophy fixed (LLM-first)
+- LLM-first architecture is fixed
 - TIM_REQUIREMENTS_V3.md created
 - TIM_START_PROMPT.md created
+- TIM_HANDOFF_V2.md created
+- TIM_RUNTIME_V1.md created
+- old conflicting files moved to legacy_backup
+- minimum runtime structure created
+- core/tim_runtime.py created
+- core/tim_llm_gateway.py created
+- layers/tim_context_builder.py created
+- layers/tim_state_layer.py created
+- layers/tim_memory_layer.py created
+- core/tim_main.py works as official entry point
+- `python3 -m core.tim_main` works
+- TIM returns natural Japanese response through OpenAI API
 
 ## What is NOT DONE
-- Memory Layer implementation
-- State Layer implementation
-- Context Builder implementation
-- Data Layer (Web / Drive / DB / SaaS)
-- Execution layer (OpenClaw integration)
+- memory relevance selection is still minimal
+- state update logic is still minimal
+- context builder is still minimal
+- Drive connector is not connected
+- Web connector is not connected
+- Internal DB connector is not connected
+- SaaS connector is not connected
+- executor connector is not connected
+- source/citation handling inside TIM is not implemented
+- long-term memory structure is not yet categorized into Personal / Project / Decision / Relationship
+- runtime logging is not yet implemented
 
-## Current Architecture Direction
-
-TIM is:
+## Current Valid Architecture
 
 User
  ↓
-TIM (LLM-first orchestrator)
- ├ Conversation Core (LLM)
- ├ Memory Layer
- ├ State Layer
- ├ Context Builder
- ├ Data Layer (future)
- └ Execution Layer (future)
+TIM
+ ├ core/tim_main.py
+ ├ core/tim_runtime.py
+ ├ core/tim_llm_gateway.py
+ ├ layers/tim_memory_layer.py
+ ├ layers/tim_state_layer.py
+ └ layers/tim_context_builder.py
+
+## Current Runtime Flow
+
+User Input
+ ↓
+tim_main
+ ↓
+tim_runtime
+ ↓
+memory/state load
+ ↓
+context builder
+ ↓
+llm gateway
+ ↓
+response_text
+
+## Frozen / Not Active
+- legacy_backup/*
+- any old Brain-centered route
+- any old tim_core-based route
+- any old tim_data_layer-based route
 
 ## Design Principles
-
 - LLM is the core intelligence
 - TIM must not degrade ChatGPT quality
-- Memory / State / Data are extensions, not replacements
-- Avoid over-architecture
-- Avoid premature abstraction
-- Build minimal → validate → expand
-
-## Known Constraints
-
-- Must preserve natural conversation quality
-- Must avoid rule-based decision system
-- Must not break context continuity
-- Must support future connectors
+- runtime prepares context, LLM does the thinking
+- memory/state/context are support layers
+- avoid over-architecture
+- avoid premature connector expansion
 
 ## Next Step
-
-Design TIM core runtime (minimal version):
-
-Define:
-- How conversation → context → LLM → response flows
-- How memory is retrieved and injected
-- How state is tracked and updated
-- How context builder selects inputs
-
-DO NOT:
-- implement connectors yet
-- over-design multi-agent systems
-- introduce complex orchestration
-
-## Success Criteria (Short-term)
-
-- TIM can respond naturally like ChatGPT
-- TIM can remember key information
-- TIM can track current discussion state
-- TIM can structure context properly before LLM
-
-## Success Criteria (Long-term)
-
-- User naturally relies on TIM
-- TIM feels like internal chief-of-staff
-- TIM reduces need to re-explain context
-- TIM integrates internal + external information seamlessly
+Refine the minimum runtime carefully:
+1. keep current working path stable
+2. improve memory/state/context quality step by step
+3. only after that, connect Drive/Web
 

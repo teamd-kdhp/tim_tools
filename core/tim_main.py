@@ -1,22 +1,28 @@
 """
 tim_main.py
 
-TIM v2 entry point.
+Official entry point for TIM Runtime V1.
 
-Responsibility:
-- Receive user input
-- Pass input to TIMBrain
-- Return final response
+Responsibilities:
+- receive user input
+- call TIM runtime
+- print user-facing response
 
 Rules:
-- No direct connector access
-- No direct LLM call
-- No direct memory/state access
+- no memory logic here
+- no state logic here
+- no context logic here
+- no LLM logic here
 """
 
-from legacy.tim_brain import TIMBrain
+from core.tim_runtime import run_tim
 
 
-def handle_user_input(user_input: str):
-    brain = TIMBrain()
-    return brain.process(user_input)
+def handle_user_input(user_input: str) -> dict:
+    return run_tim(user_input)
+
+
+if __name__ == "__main__":
+    user_input = input("TIM > ")
+    result = handle_user_input(user_input)
+    print(result["response_text"])
