@@ -1,92 +1,56 @@
 # TIM STATUS
 
-## Current Phase
-MINIMUM WORKING CORE COMPLETED
+## Current State
+TIM Runtime V1 is working.
 
-## Current Goal
-Stabilize the first working TIM runtime based on LLM-first architecture.
+- LLM-first architecture established
+- External LLM integration completed (OpenAI API)
+- Memory layer implemented
+- Memory persistence confirmed
+- LLM-based memory filtering implemented (should_store_memory)
+- Conversation → Memory → Recall loop is working
 
-## Current Step
-Update documentation to reflect the real current implementation state.
+## Verified Behavior
+- Non-important inputs (e.g., greetings) are NOT stored
+- Important inputs (e.g., identity, work style) ARE stored
+- Stored memory is correctly injected into next LLM call
+- LLM can recall past user information
 
-## Active Task
-Document the current working TIM Runtime V1 and fix source-of-truth files.
+## Current Limitation
+- Memory is stored as raw conversation text
+- No structure (type / key / value)
+- No semantic compression
+- No prioritization beyond YES/NO
 
-## What is DONE
-- LLM-first architecture is fixed
-- TIM_REQUIREMENTS_V3.md created
-- TIM_START_PROMPT.md created
-- TIM_HANDOFF_V2.md created
-- TIM_RUNTIME_V1.md created
-- old conflicting files moved to legacy_backup
-- minimum runtime structure created
-- core/tim_runtime.py created
-- core/tim_llm_gateway.py created
-- layers/tim_context_builder.py created
-- layers/tim_state_layer.py created
-- layers/tim_memory_layer.py created
-- core/tim_main.py works as official entry point
-- `python3 -m core.tim_main` works
-- TIM returns natural Japanese response through OpenAI API
+## Architecture (Current)
 
-## What is NOT DONE
-- memory relevance selection is still minimal
-- state update logic is still minimal
-- context builder is still minimal
-- Drive connector is not connected
-- Web connector is not connected
-- Internal DB connector is not connected
-- SaaS connector is not connected
-- executor connector is not connected
-- source/citation handling inside TIM is not implemented
-- long-term memory structure is not yet categorized into Personal / Project / Decision / Relationship
-- runtime logging is not yet implemented
+TIM Runtime
+  ↓
+Context Builder
+  ↓
+LLM Gateway (OpenAI)
+  ↓
+Memory Layer (append / load)
+  ↓
+State Layer
 
-## Current Valid Architecture
+## Summary
 
-User
- ↓
-TIM
- ├ core/tim_main.py
- ├ core/tim_runtime.py
- ├ core/tim_llm_gateway.py
- ├ layers/tim_memory_layer.py
- ├ layers/tim_state_layer.py
- └ layers/tim_context_builder.py
+TIM is now:
+- Not stateless
+- Not rule-based
+- Not simple chatbot
 
-## Current Runtime Flow
+TIM is:
+- LLM-first
+- Stateful
+- Memory-enabled
 
-User Input
- ↓
-tim_main
- ↓
-tim_runtime
- ↓
-memory/state load
- ↓
-context builder
- ↓
-llm gateway
- ↓
-response_text
+## Next Direction
 
-## Frozen / Not Active
-- legacy_backup/*
-- any old Brain-centered route
-- any old tim_core-based route
-- any old tim_data_layer-based route
+Move from:
+- "store conversation"
 
-## Design Principles
-- LLM is the core intelligence
-- TIM must not degrade ChatGPT quality
-- runtime prepares context, LLM does the thinking
-- memory/state/context are support layers
-- avoid over-architecture
-- avoid premature connector expansion
-
-## Next Step
-Refine the minimum runtime carefully:
-1. keep current working path stable
-2. improve memory/state/context quality step by step
-3. only after that, connect Drive/Web
+To:
+- "extract meaningful structured memory"
 

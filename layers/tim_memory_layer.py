@@ -4,9 +4,9 @@ tim_memory_layer.py
 Minimum memory layer for TIM Runtime V1.
 
 Responsibilities:
-- load relevant memory
-- save updated memory
-- return compact list memory
+- load memory context
+- save memory context
+- append conversation entries
 
 Rules:
 - no LLM call here
@@ -44,3 +44,24 @@ def save_memory_context(memory: list) -> None:
 
     with _MEMORY_PATH.open("w", encoding="utf-8") as f:
         json.dump(memory, f, ensure_ascii=False, indent=2)
+
+
+def append_memory_entry(role: str, content: str) -> None:
+    if role not in ("user", "assistant"):
+        raise ValueError("role must be 'user' or 'assistant'")
+
+    if not isinstance(content, str):
+        raise TypeError("content must be a str")
+
+    text = content.strip()
+    if not text:
+        return
+
+    memory = load_memory_context()
+    memory.append(
+        {
+            "role": role,
+            "content": text,
+        }
+    )
+    save_memory_context(memory)
