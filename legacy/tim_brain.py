@@ -3,9 +3,9 @@
 import json
 from janome.tokenizer import Tokenizer
 from state.tim_task_state import TIMTaskState
-from agents.intelligence_agent import IntelligenceAgent
-from agents.execution_agent import ExecutionAgent
-from agents.strategy_agent import StrategyAgent
+from .agents.intelligence_agent import IntelligenceAgent
+from .agents.execution_agent import ExecutionAgent
+from .agents.strategy_agent import StrategyAgent
 
 
 class TIMBrain:
@@ -98,9 +98,6 @@ class TIMBrain:
             score = self.similarity_score(user_input, previous_state["user_input"])
             previous_intent = previous_state["intent"]
 
-        
-
-        # 🔴 既存事業の拡張チェック
         if any(k in user_input for k in ["こどハピ", "既存", "拡張", "横展開", "スポンサー"]):
             decision = "EXECUTE"
 
@@ -149,7 +146,6 @@ class TIMBrain:
         )
 
 
-# test
 if __name__ == "__main__":
     brain = TIMBrain()
 

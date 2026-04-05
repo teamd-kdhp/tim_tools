@@ -1,14 +1,19 @@
 {
-  "user_input": "\u3053\u3069\u30cf\u30d4TV\u3092\u30d9\u30fc\u30b9\u306b\u3001\u4f01\u696d\u30b9\u30dd\u30f3\u30b5\u30fc\u3092\u5165\u308c\u3066\u6559\u80b2\u52d5\u753b\u3068PR\u3092\u7d44\u307f\u5408\u308f\u305b\u305f\u65b0\u898f\u4e8b\u696d\u3092\u3084\u308a\u305f\u3044",
-  "intent": "general",
+  "user_input": "\u5e02\u5834\u3092\u5206\u6790\u3057\u3066",
+  "intent": "analysis",
   "tasks": [
     {
+      "agent": "intelligence",
+      "task_type": "deep_research"
+    },
+    {
       "agent": "execution",
-      "task_type": "quick_response"
+      "task_type": "report"
     }
   ],
   "status": "in_progress",
   "progress": [
-    "Execution processed: quick_response"
+    "Intelligence processed: deep_research",
+    "Execution processed: report"
   ]
 }

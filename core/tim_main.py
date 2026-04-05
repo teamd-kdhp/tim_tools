@@ -5,7 +5,7 @@ TIM v2 entry point.
 
 Responsibility:
 - Receive user input
-- Pass input to tim_core.py
+- Pass input to TIMBrain
 - Return final response
 
 Rules:
@@ -14,8 +14,9 @@ Rules:
 - No direct memory/state access
 """
 
-from . import tim_core
+from legacy.tim_brain import TIMBrain
 
 
-def handle_user_input(user_input: str) -> str:
-    return tim_core.handle_user_input(user_input)
+def handle_user_input(user_input: str):
+    brain = TIMBrain()
+    return brain.process(user_input)
