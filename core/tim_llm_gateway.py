@@ -1,93 +1,81 @@
 """
 tim_llm_gateway.py
-Single gateway to LLM provider.
+
+Minimum LLM gateway for TIM Runtime V1.
+
+Responsibilities:
+- receive runtime context
+- build a prompt for the LLM
+- call OpenAI API
+- return plain response text
+
+Rules:
+- no memory logic here
+- no state logic here
+- no decision logic here
 """
 
 from __future__ import annotations
+
 import json
 import os
 import urllib.error
 import urllib.request
 
+
 _OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions"
 _DEFAULT_MODEL = "gpt-4o-mini"
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MEMORY_PATH = os.path.join(BASE_DIR, "memory", "conversation_memory.json")
 
-MAX_CONTEXT_MESSAGES = 20
+def _build_prompt(context: dict) -> str:
+    user_input = context.get("user_input", "")
+    mode = context.get("mode", "conversation")
+    memory = context.get("memory", [])
+    state = context.get("state", {})
 
-IMPORTANT_KEYWORDS = [
-    "覚えて",
-    "重要",
-    "忘れるな",
-    "remember",
-    "important",
-]
+    memory_text = json.dumps(memory, ensure_ascii=False, indent=2)
+    state_text = json.dumps(state, ensure_ascii=False, indent=2)
 
+    return f"""You are TIM, an LLM-first strategic partner.
 
-def build_context(memory):
-    return memory[-MAX_CONTEXT_MESSAGES:]
+Mode:
+{mode}
 
+Relevant memory:
+{memory_text}
 
-def is_important(text):
-    return any(k in text for k in IMPORTANT_KEYWORDS)
+Current state:
+{state_text}
 
+Current user input:
+{user_input}
 
-def add_user_message(memory, prompt):
-    memory.append({
-        "role": "user",
-        "content": prompt,
-        "important": is_important(prompt),
-    })
-
-
-def add_assistant_message(memory, reply):
-    memory.append({
-        "role": "assistant",
-        "content": reply,
-        "important": False,
-    })
+Respond naturally in Japanese.
+Be helpful, clear, and practical.
+"""
 
 
-def load_memory():
-    if not os.path.exists(MEMORY_PATH):
-        return []
-    with open(MEMORY_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data if isinstance(data, list) else []
-
-
-def save_memory(memory):
-    parent = os.path.dirname(MEMORY_PATH)
-    if parent:
-        os.makedirs(parent, exist_ok=True)
-    with open(MEMORY_PATH, "w", encoding="utf-8") as f:
-        json.dump(memory, f, ensure_ascii=False, indent=2)
-
-
-def send_to_llm(payload: dict) -> dict:
-    if not isinstance(payload, dict):
-        raise TypeError("payload must be a dict")
-
-    prompt = payload.get("prompt")
-    if not isinstance(prompt, str) or not prompt.strip():
-        raise ValueError("prompt must be a non-empty string")
+def send_to_llm(context: dict) -> str:
+    if not isinstance(context, dict):
+        raise TypeError("context must be a dict")
 
     api_key = (os.environ.get("OPENAI_API_KEY") or "").strip()
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is missing or empty")
 
-    memory = load_memory()
-    add_user_message(memory, prompt)
-    context = build_context(memory)
+    prompt = _build_prompt(context)
 
-    api_messages = [{"role": m["role"], "content": m["content"]} for m in context]
-
-    body = json.dumps({
-        "model": _DEFAULT_MODEL,
-        "messages": api_messages,
-    }).encode("utf-8")
+    body = json.dumps(
+        {
+            "model": _DEFAULT_MODEL,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+        }
+    ).encode("utf-8")
 
     req = urllib.request.Request(
         _OPENAI_CHAT_URL,
@@ -110,25 +98,13 @@ def send_to_llm(payload: dict) -> dict:
 
     try:
         data = json.loads(raw)
-    except json.JSONDecodeError as e:
-        raise RuntimeError("OpenAI API returned invalid JSON") from e
-
-    try:
         content = data["choices"][0]["message"]["content"]
-    except (KeyError, IndexError, TypeError) as e:
-        raise RuntimeError("OpenAI API returned an unexpected response shape") from e
+    except (json.JSONDecodeError, KeyError, IndexError, TypeError) as e:
+        raise RuntimeError("OpenAI API returned unexpected response") from e
 
-    text = "" if content is None else (content if isinstance(content, str) else str(content))
+    text = content if isinstance(content, str) else str(content)
 
     if not text.strip():
-        raise RuntimeError("OpenAI API returned empty assistant content")
+        raise RuntimeError("OpenAI API returned empty content")
 
-    add_assistant_message(memory, text)
-    save_memory(memory)
-
-    return {
-        "response": text,
-        "reasoning_summary": "",
-        "confidence": 0.0,
-        "actions": [],
-    }
+    return text
